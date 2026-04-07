@@ -22,7 +22,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import helpers
 from utils_configs.plot.HEPPlotter import HEPPlotter
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument("-l", "--title", type=str, default="", help="Title of the plot")
 parser.add_argument(
@@ -421,6 +420,7 @@ def signal_background_hist(class_dict, plot_dir, no_weights, kl):
 def main():
     class_dict = {}
     roc_values_dict = {}
+    kl_list = ["all"]
 
     for model_name, model_dict in spanet_dict.items():
         logger.info(f"Loading new file {model_name}")
@@ -438,8 +438,12 @@ def main():
         spanet_class = spanetfile["CLASSIFICATIONS"]["EVENT"]["class"][:, 1][()][mask_region_spanet]
         true_class = truefile["CLASSIFICATIONS"]["EVENT"]["class"][()][mask_region_spanet]
         weights = truefile["WEIGHTS"]["weight"][()][mask_region_spanet]
-        kls = spanetfile["INPUTS"]["Event"]["kl"][()][mask_region_spanet]            
-        
+        kls = spanetfile["INPUTS"]["Event"]["kl"][()][mask_region_spanet]
+
+        for kl in np.unique(kls):
+            if kl not in kl_list and kl != 9999.:
+                kl_list.append(f"{kl:.2f}")
+            
         class_dict[model_name] = {
             "spanet_class": spanet_class,
             "true_class": true_class,
@@ -458,6 +462,10 @@ def main():
         
         for var_name in  np_arrays.keys():
             kl=var_name.split("kl_")[-1]
+
+            if kl not in kl_list:
+                kl_list.append(str(kl))
+            
             if kl not in roc_values_dict[model_name]:
                 roc_values_dict[model_name][kl]={}
             
@@ -465,7 +473,7 @@ def main():
                 var_name: np_arrays[var_name],
             } | model_dict  
 
-    for kl in ["all"]: #, "-2.00", "-1.00", "0.00", "0.50", "1.00", "1.50", "2.00", "2.45", "3.00", "3.50", "4.00", "5.00"]:
+    for kl in kl_list:
         roc_curve_compare_weights(
             class_dict, roc_values_dict, args.plot_dir, args.fpr_cutoff, args.no_weights, kl
         )
