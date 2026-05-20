@@ -419,7 +419,7 @@ def signal_background_hist(class_dict, plot_dir, no_weights, kl):
                     )
                 )
                 # if args.plot_quantile:
-                histplot.add_line(orientation="v", x=cut, color="black", linestyle="dotted")  # 0 and 1 should not have a particular effect. its just to have two points on the line
+                histplot.add_line(orientation="v", x=cut, color="black", linestyle="dotted", label=f"99% Background Quantile | Signal Efficiency {sig_eff * 100:.2f}%")  # 0 and 1 should not have a particular effect. its just to have two points on the line
                 histplot.run()
 
     if len(series_all_models) > 2:  # to avoid plotting the combined plot with all the models if there's only one model
@@ -469,8 +469,7 @@ def main():
         model_dict.pop("file")
         model_dict.pop("true")
 
-        # mask_region_spanet = helpers.get_region_mask(args.region, spanetfile, True)
-        mask_region_spanet = helpers.get_region_mask(args.region, spanetfile, True, jet_coll, n_higgs_jets=n_higgs_jets)
+        # mask_region_spanet = helpers.get_region_mask(args.region, spanetfile, True, jet_coll, n_higgs_jets=n_higgs_jets)
 
         spanet_class = spanetfile["CLASSIFICATIONS"]["EVENT"]["class"][:, 1][()]  # [mask_region_spanet]
         true_class = truefile["CLASSIFICATIONS"]["EVENT"]["class"][()]  # [mask_region_spanet]

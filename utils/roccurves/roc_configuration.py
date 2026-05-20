@@ -12,11 +12,11 @@ logger = logging.getLogger(__name__)
 
 
 roc_dict = {
-#    "reference_model": {
-#        "file": "/eos/home-m/mmalucch/spanet_infos/dnn_roc/DNN_AN_1e-3_e20drop75_minDelta1em5_SPANet_newUpdates_newLeptonVeto_3L1Cut_UpdateJetVetoMap_postEE_thierry/tpr_fpr.npz",
-#        "label": "Reference Model",
-#        "color": "tab:red",
-#    },
+   "reference_model": {
+       "file": "/eos/home-m/mmalucch/spanet_infos/dnn_roc/DNN_AN_1e-3_e20drop75_minDelta1em5_SPANet_newUpdates_newLeptonVeto_3L1Cut_UpdateJetVetoMap_postEE_thierry/tpr_fpr.npz",
+       "label": "Reference Model",
+       "color": "tab:red",
+   },
 }
 
 
@@ -639,12 +639,12 @@ spanet_dict = {
 #        "color": "pink",
 #    },
 
-#     "spanet_dict_hh4b_classification_var000082": {
-#        "file": f"{spanet_dir_kevin}variables/hh4b_classification_var000082/hh4b_classification_var000082.h5",
-#        "true": "true_dict_1_15_10_mixed_with_additional_Higgs_collections",
-#        "label": "var000082",
-#        "color": "tab:purple",
-#    },
+    "spanet_dict_hh4b_classification_var000082": {
+       "file": f"{spanet_dir_kevin}variables/hh4b_classification_var000082/hh4b_classification_var000082.h5",
+       "true": "true_dict_1_15_10_mixed_with_additional_Higgs_collections",
+       "label": "var000082",
+       "color": "tab:purple",
+   },
 
 #     "spanet_dict_hh4b_classification_var000083": {
 #        "file": f"{spanet_dir_kevin}variables/hh4b_classification_var000083/hh4b_classification_var000083.h5",
