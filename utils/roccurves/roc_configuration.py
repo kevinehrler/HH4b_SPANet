@@ -971,6 +971,7 @@ true_dict = {
     },
 
     "true_dict_1_15_10_mixed_with_additional_Higgs_collections": {
-        "name": f"{true_path_thierry}1_15_10_mixed_with_additional_Higgs_collections/columns_for_classifierJetGoodFromHiggsOrderedLeading_JetGoodFromHiggsOrderedSubLeading_add_jet1pt_test.h5"
+        "name": f"{true_path_thierry}1_15_10_mixed_with_additional_Higgs_collections/columns_for_classifierJetGoodFromHiggsOrderedLeading_JetGoodFromHiggsOrderedSubLeading_add_jet1pt_test.h5",
+        "jet_coll": "JetHiggsLeading",
     },
 }

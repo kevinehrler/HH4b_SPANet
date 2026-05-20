@@ -469,15 +469,14 @@ def main():
         model_dict.pop("file")
         model_dict.pop("true")
 
-        # mask_region_spanet = helpers.get_region_mask(args.region, spanetfile, True, jet_coll, n_higgs_jets=n_higgs_jets)
+        mask_region_spanet = helpers.get_region_mask(args.region, spanetfile, True, jet_coll, n_higgs_jets=n_higgs_jets)
 
-        spanet_class = spanetfile["CLASSIFICATIONS"]["EVENT"]["class"][:, 1][()]  # [mask_region_spanet]
-        true_class = truefile["CLASSIFICATIONS"]["EVENT"]["class"][()]  # [mask_region_spanet]
-        weights = truefile["WEIGHTS"]["weight"][()]  # [mask_region_spanet]
+        spanet_class = spanetfile["CLASSIFICATIONS"]["EVENT"]["class"][:, 1][()][mask_region_spanet]
+        true_class = truefile["CLASSIFICATIONS"]["EVENT"]["class"][()][mask_region_spanet]
+        weights = truefile["WEIGHTS"]["weight"][()][mask_region_spanet]
 
         try:
-            kls = spanetfile["INPUTS"]["Event"]["kl"][()]  # [mask_region_spanet]
-            kls_signal.extend(np.unique(kls[true_class == 1]))
+            kls = spanetfile["INPUTS"]["Event"]["kl"][()][mask_region_spanet]
         except KeyError:
             kls = np.ones_like(weights) * 9999.
 
